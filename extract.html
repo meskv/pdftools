@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extract or reorder pages – PDF Tools</title><meta name="description" content="Keep only the pages you list. Listing them in a different order reorders them, for example 3, 1, 2.">
+<link rel="stylesheet" href="style.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script></head><body>
+<header><a href="index.html">PDF Tools</a></header>
+<main><h1>Extract or reorder pages</h1><p class="lede">Keep only the pages you list. Listing them in a different order reorders them, for example 3, 1, 2.</p>
+<div id="drop" tabindex="0">Drop a PDF here or <label for="inp">choose from your device</label><input id="inp" type="file" hidden></div>
+<ul id="list"></ul><div id="opts"><label>Pages to keep <input id="range" placeholder="1-3, 5, 8"></label></div>
+<button id="go">Extract pages</button><p id="status" role="status"></p></main>
+<footer>Everything runs in your browser. Your files are never uploaded.</footer>
+<script src="common.js"></script>
+<script>init({accept:"application/pdf",multiple:false,run:async(files)=>{
+const s=await PDFLib.PDFDocument.load(await files[0].arrayBuffer());
+const idx=ranges($('#range').value,s.getPageCount());
+const d=await PDFLib.PDFDocument.create();
+(await d.copyPages(s,idx)).forEach(p=>d.addPage(p));
+return [['extracted.pdf',await d.save(),'application/pdf']];
+}})</script></body></html>

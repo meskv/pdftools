@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merge PDFs – PDF Tools</title><meta name="description" content="Combine several PDFs into one. Reorder them with Up and Down.">
+<link rel="stylesheet" href="style.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script></head><body>
+<header><a href="index.html">PDF Tools</a></header>
+<main><h1>Merge PDFs</h1><p class="lede">Combine several PDFs into one. Reorder them with Up and Down.</p>
+<div id="drop" tabindex="0">Drop PDF files here or <label for="inp">choose from your device</label><input id="inp" type="file" hidden></div>
+<ul id="list"></ul><div id="opts"></div>
+<button id="go">Merge</button><p id="status" role="status"></p></main>
+<footer>Everything runs in your browser. Your files are never uploaded.</footer>
+<script src="common.js"></script>
+<script>init({accept:"application/pdf",multiple:true,run:async(files)=>{
+if(files.length<2)throw Error('Add at least two PDFs.');
+const d=await PDFLib.PDFDocument.create();
+for(const f of files){const s=await PDFLib.PDFDocument.load(await f.arrayBuffer());(await d.copyPages(s,s.getPageIndices())).forEach(p=>d.addPage(p));}
+return [['merged.pdf',await d.save(),'application/pdf']];
+}})</script></body></html>
