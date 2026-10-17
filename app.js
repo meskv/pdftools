@@ -63,5 +63,6 @@ function tool(T){
    for(const[n,d,t]of out)save(n,d,t);
    say(T.id=='compress'?`Done. ${kb(S.f.reduce((a,f)=>a+f.buf.byteLength,0))} became ${kb(out[0][1].length)}.`:'Done. Your download has started.')}
   catch(e){say('Something went wrong: '+e.message)}g.disabled=0}}
-const T0=TOOLS.find(t=>t.id==document.body.dataset.tool);T0?tool(T0):home();
+const T0=TOOLS.find(t=>t.id==document.body.dataset.tool);T0?(T0.ed?editor(T0):tool(T0)):home();
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js");
 $('#theme').onclick=()=>{const t=document.documentElement.dataset.theme=='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.t=t};
