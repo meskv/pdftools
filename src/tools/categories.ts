@@ -1,0 +1,1 @@
+export const CATS: Record<string, [string, string]> = { org: ['Organize', '#fde4df'], opt: ['Optimize', '#dcf3e2'], to: ['Convert to PDF', '#fff0c2'], from: ['Convert from PDF', '#dbe6fb'], edit: ['Edit', '#eadcf7'], sec: ['Security & signing', '#d8f1ef'] };
