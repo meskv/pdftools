@@ -1,6 +1,6 @@
 // @ts-nocheck
 // Imperative DOM module (drag-and-drop pages / click-to-place objects), mounted from a React page.
-import { $, H, S, say, ready, save, build, RENDER, BLOB, PDFLib, pdfjsLib } from '../engine/pdf';
+import { $, H, S, say, ready, save, build, RENDER, BLOB, PDFLib, pdfjsLib, handoff } from '../engine/pdf';
 import { M } from '../tools/modes';
 
 const K={whiteout:['#ffffff',1],highlight:['#ffe14d',.45],redact:['#000000',1]};
@@ -46,6 +46,7 @@ export function mountEditor(T:any,root:HTMLElement){
   say('')}
  $('#pick').onclick=()=>$('#in').click();$('#in').onchange=e=>{open(e.target.files[0]);e.target.value=''};
  $('#fi').onchange=async e=>{const b=await createImageBitmap(e.target.files[0]),c=H('canvas');c.width=b.width;c.height=b.height;c.getContext('2d').drawImage(b,0,0);pend=c.toDataURL('image/png');e.target.value='';say('Now click on the page where the image should go.')};
+ if(handoff.file){const f=handoff.file;handoff.file=null;open(f)}
  document.ondragover=e=>e.preventDefault();document.ondrop=e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f&&!S.f.length)open(f)};
  $('#go').onclick=async()=>{const g=$('#go');g.disabled=1;
   try{say('Saving…');const f=S.f[0],src=await PDFLib.PDFDocument.load(f.buf,{ignoreEncryption:true});let d=src;

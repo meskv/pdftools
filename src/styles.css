@@ -81,3 +81,14 @@ footer{text-align:center;color:var(--mu);font-size:14px;padding:24px;border-top:
 .qp label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mu)}
 .qp input,.qp select{font:inherit;padding:9px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
 .qmsg{text-align:center;color:var(--mu);min-height:1.5em}
+.left{min-width:0}
+.files{display:flex;gap:12px;overflow-x:auto;padding:12px 16px;background:var(--sf);border:1px solid var(--ln);border-radius:14px;margin-bottom:14px}
+.files:empty{display:none}
+.fc{position:relative;flex:0 0 auto;width:128px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;background:var(--bg);border:1px solid var(--ln);border-top:4px solid var(--ln);border-radius:10px;cursor:grab}
+.fc img{height:110px;max-width:100%;object-fit:contain;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.fc b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}.fc small{color:var(--mu);font-size:12px}
+.fn{position:absolute;top:6px;left:6px;z-index:1;background:var(--ink);color:var(--bg);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:12px;font-weight:700}
+.fb{display:flex;gap:4px}.fb button{border:1px solid var(--ln);background:none;color:var(--ink);border-radius:6px;padding:1px 7px;cursor:pointer;font-size:12px}
+[data-m=order] .pg{border-top-width:3px}
+.ghost{background:none;color:var(--ac);border:1px solid var(--ac);width:100%}
+.btn[hidden],aside label[hidden]{display:none}

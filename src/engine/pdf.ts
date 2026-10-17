@@ -20,3 +20,5 @@ export async function build(it: any[]) {
   return d;
 }
 export const base = (n: string) => n.replace(/\.pdf$/i, '');
+/** Hand a PDF from one tool to the next without downloading and re-uploading it. */
+export const handoff: { file: File | null } = { file: null };

@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Tool } from '../tools/types';
-import { save } from '../engine/pdf';
+import { save, handoff } from '../engine/pdf';
 
 const kb = (n: number) => `${Math.max(1, Math.round(n / 1024))} KB`;
 
@@ -11,6 +11,8 @@ export default function QuickTool({ tool }: { tool: Tool }) {
   const [o, setO] = useState<Record<string, string>>(() => Object.fromEntries((tool.o ?? []).map(f => [f.k, f.d ?? f.v?.[0][0] ?? ''])));
   const [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => { if (handoff.file) { setFile(handoff.file); handoff.file = null; } }, []);
 
   const pick = (f?: File) => { if (f && /\.pdf$/i.test(f.name)) { setFile(f); setMsg(''); } else setMsg('Please choose a PDF file.'); };
   const run = async () => {
