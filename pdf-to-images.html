@@ -1,20 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PDF to images – PDF Tools</title><meta name="description" content="Save every page as a PNG or JPG, delivered in one ZIP file.">
-<link rel="stylesheet" href="style.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script></head><body>
-<header><a href="index.html">PDF Tools</a></header>
-<main><h1>PDF to images</h1><p class="lede">Save every page as a PNG or JPG, delivered in one ZIP file.</p>
-<div id="drop" tabindex="0">Drop a PDF here or <label for="inp">choose from your device</label><input id="inp" type="file" hidden></div>
-<ul id="list"></ul><div id="opts"><label>Format <select id="fmt"><option value="png">PNG</option><option value="jpeg">JPG</option></select></label><label>Quality <select id="scale"><option value="1.5">Standard</option><option value="2">High</option><option value="3">Very high</option></select></label></div>
-<button id="go">Convert</button><p id="status" role="status"></p></main>
+<title>PDF Tools – free, private, in your browser</title>
+<meta name="description" content="Merge, split, rotate, organize and convert PDFs in your browser. Nothing is uploaded.">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.dataset.theme=localStorage.t||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
+</head><body data-tool="pdf-to-images">
+<header><a class="logo" href="index.html">PDF Tools</a><a class="nav" href="index.html">All tools</a><button id="theme" aria-label="Switch light or dark mode">◐</button></header>
+<main id="app"></main>
 <footer>Everything runs in your browser. Your files are never uploaded.</footer>
-<script src="common.js"></script>
-<script>init({accept:"application/pdf",multiple:false,run:async(files)=>{
-await pdfjsReady();
-const pdf=await pdfjsLib.getDocument({data:await files[0].arrayBuffer()}).promise,z=new JSZip(),sc=+$('#scale').value,fmt=$('#fmt').value;
-for(let i=1;i<=pdf.numPages;i++){say(`Page ${i} of ${pdf.numPages}…`);
-const p=await pdf.getPage(i),v=p.getViewport({scale:sc}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;
-await p.render({canvasContext:c.getContext('2d'),viewport:v}).promise;
-z.file(`page-${i}.${fmt==='jpeg'?'jpg':'png'}`,await new Promise(r=>c.toBlob(r,'image/'+fmt,.92)));}
-return [['pages.zip',await z.generateAsync({type:'blob'}),'application/zip']];
-}})</script></body></html>
+<script src="tools.js"></script><script src="app.js"></script>
+</body></html>

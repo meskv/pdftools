@@ -1,18 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Add page numbers – PDF Tools</title><meta name="description" content="Stamp “1 / 10” style numbers at the bottom of every page.">
-<link rel="stylesheet" href="style.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script></head><body>
-<header><a href="index.html">PDF Tools</a></header>
-<main><h1>Add page numbers</h1><p class="lede">Stamp “1 / 10” style numbers at the bottom of every page.</p>
-<div id="drop" tabindex="0">Drop a PDF here or <label for="inp">choose from your device</label><input id="inp" type="file" hidden></div>
-<ul id="list"></ul><div id="opts"><label>Position <select id="pos"><option value="center">Bottom center</option><option value="right">Bottom right</option><option value="left">Bottom left</option></select></label></div>
-<button id="go">Add numbers</button><p id="status" role="status"></p></main>
+<title>PDF Tools – free, private, in your browser</title>
+<meta name="description" content="Merge, split, rotate, organize and convert PDFs in your browser. Nothing is uploaded.">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.dataset.theme=localStorage.t||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
+</head><body data-tool="page-numbers">
+<header><a class="logo" href="index.html">PDF Tools</a><a class="nav" href="index.html">All tools</a><button id="theme" aria-label="Switch light or dark mode">◐</button></header>
+<main id="app"></main>
 <footer>Everything runs in your browser. Your files are never uploaded.</footer>
-<script src="common.js"></script>
-<script>init({accept:"application/pdf",multiple:false,run:async(files)=>{
-const s=await PDFLib.PDFDocument.load(await files[0].arrayBuffer());
-const f=await s.embedFont(PDFLib.StandardFonts.Helvetica),pos=$('#pos').value,n=s.getPageCount();
-s.getPages().forEach((p,i)=>{const t=`${i+1} / ${n}`,w=f.widthOfTextAtSize(t,10),W=p.getWidth();
-p.drawText(t,{x:pos==='left'?36:pos==='right'?W-36-w:(W-w)/2,y:24,size:10,font:f});});
-return [['numbered.pdf',await s.save(),'application/pdf']];
-}})</script></body></html>
+<script src="tools.js"></script><script src="app.js"></script>
+</body></html>
