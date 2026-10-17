@@ -9,5 +9,6 @@ React + TypeScript + Vite. Everything runs in the browser; no backend.
 - src/tools/*.ts: one file per tool (name, options, and its run/post function). Register it in src/tools/index.ts.
 - src/engine/pdf.ts: shared PDF helpers (render, build, save) and libraries.
 - src/workspace/: imperative page-grid and click-to-place editor, mounted by src/pages/ToolPage.tsx.
-- src/components, src/pages: React UI (mega menu, home, tool page).
+- src/components, src/pages: React UI (mega menu, home, tool page, QuickTool for no-preview tools like Protect/Unlock).
+- src/engine/qpdf.ts: qpdf compiled to WebAssembly (encrypt, decrypt, repair, optimize), loaded on demand.
 - public/CNAME: custom domain. .github/workflows/deploy.yml: auto-deploys main to GitHub Pages.

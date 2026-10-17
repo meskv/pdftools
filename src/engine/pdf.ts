@@ -19,3 +19,4 @@ export async function build(it: any[]) {
     const [p] = await d.copyPages(f.doc, [i.p - 1]); if (i.r) p.setRotation(PDFLib.degrees((p.getRotation().angle + i.r) % 360)); d.addPage(p); }
   return d;
 }
+export const base = (n: string) => n.replace(/\.pdf$/i, '');

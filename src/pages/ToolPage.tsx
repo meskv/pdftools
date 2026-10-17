@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import QuickTool from '../components/QuickTool';
 import ToolGrid from '../components/ToolGrid';
 import { TOOLS } from '../tools';
 import { mountPageTool } from '../workspace/pageWorkspace';
@@ -11,7 +12,7 @@ export default function ToolPage() {
   const host = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!tool || !host.current) return;
+    if (!tool || tool.q || !host.current) return;
     document.title = `${tool.n} – PDF Tools`;
     return tool.ed ? mountEditor(tool, host.current) : mountPageTool(tool, host.current);
   }, [tool]);
@@ -19,7 +20,7 @@ export default function ToolPage() {
   if (!tool) return <section className="head"><h1>Tool not found</h1><p><Link to="/">Browse all tools</Link></p></section>;
   return (
     <>
-      <div ref={host} />
+      {tool.q ? <QuickTool key={tool.id} tool={tool} /> : <div ref={host} />}
       <h2 className="more">More tools</h2>
       <ToolGrid tools={TOOLS.filter(t => t !== tool)} />
     </>

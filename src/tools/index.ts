@@ -18,6 +18,10 @@ import t_crop from './crop';
 import t_ocr from './ocr';
 import t_metadata from './metadata';
 import t_flatten from './flatten';
+import t_protect from './protect';
+import t_unlock from './unlock';
+import t_repair from './repair';
+import t_optimize from './optimize';
 export { CATS } from './categories';
 export const TOOLS: Tool[] = [
   t_merge,
@@ -38,5 +42,9 @@ export const TOOLS: Tool[] = [
   t_crop,
   t_ocr,
   t_metadata,
-  t_flatten
+  t_flatten,
+  t_protect,
+  t_unlock,
+  t_repair,
+  t_optimize
 ];
